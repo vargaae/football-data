@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Container, Typography } from "@mui/material";
+import Carousel from './Carousel';
 
 const useStyles = makeStyles(() => ({
   banner: {
@@ -10,7 +11,6 @@ const useStyles = makeStyles(() => ({
     backgroundSize: "cover",
   },
   bannerContent: {
-    height: 500,
     display: "flex",
     flexDirection: "column",
     paddingTop: 25,
@@ -51,6 +51,7 @@ const Banner = () => {
           >
             Keep track of information about football competitions
           </Typography>
+          <Carousel />
         </div>
       </Container>
     </div>

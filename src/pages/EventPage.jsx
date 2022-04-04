@@ -12,7 +12,38 @@ import {
   useGetMatchDetailsQuery,
 } from "../features/Api/FootballApi";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 600,
+    backgroundColor: "#2B2D2F",
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  heading: {
+    fontWeight: "bold",
+    marginBottom: 20,
+    fontFamily: "Montserrat",
+    textAlign: "center",
+    color: "white",
+  },
+  description: {
+    width: "100%",
+    fontFamily: "Montserrat",
+    padding: 25,
+    paddingBottom: 15,
+    paddingTop: 0,
+    textAlign: "center",
+    color: "white",
+  },
+}));
+
 const EventPage = (matchId) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useParams();
   const {
@@ -22,36 +53,6 @@ const EventPage = (matchId) => {
     refetch,
   } = useGetMatchDetailsQuery(id);
   const [count, setCount] = useState(0);
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      maxWidth: 600,
-      backgroundColor: "#2B2D2F",
-    },
-    container: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    heading: {
-      fontWeight: "bold",
-      marginBottom: 20,
-      fontFamily: "Montserrat",
-      textAlign: "center",
-      color: "white",
-    },
-    description: {
-      width: "100%",
-      fontFamily: "Montserrat",
-      padding: 25,
-      paddingBottom: 15,
-      paddingTop: 0,
-      textAlign: "center",
-      color: "white",
-    },
-  }));
-
-  const classes = useStyles();
 
   function handleRefetchOne() {
     // force re-fetches the data
