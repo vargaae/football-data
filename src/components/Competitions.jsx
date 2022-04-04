@@ -44,6 +44,9 @@ const Competitions = () => {
     error,
     refetch,
   } = useGetCompetitionsQuery();
+  // Avaible Competitions' data -> FREE TIER: fetch football-data.org API
+  // -> features/Api/competitions.json -> filter data-> "plan": "TIER_ONE"
+
   const [count, setCount] = useState(0);
 
   if (error) {

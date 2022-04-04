@@ -18,7 +18,14 @@ export const footballApi = createApi({
     getMatches: builder.query({
       query: (id) => createRequest(`/competitions/${id}/matches`),
     }),
+    getMatchDetails: builder.query({
+      query: (id) => createRequest(`/matches/${id}`),
+    }),
   }),
 });
 
-export const { useGetCompetitionsQuery, useGetMatchesQuery } = footballApi;
+export const {
+  useGetCompetitionsQuery,
+  useGetMatchesQuery,
+  useGetMatchDetailsQuery,
+} = footballApi;
