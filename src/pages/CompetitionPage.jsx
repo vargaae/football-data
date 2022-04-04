@@ -1,9 +1,8 @@
-import React from "react";
-// import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useGetMatchesQuery } from "../features/Api/FootballApi";
+import { footballApi, useGetMatchesQuery } from "../features/Api/FootballApi";
 import { makeStyles } from "@mui/styles";
 import { useTheme } from "@mui/material/styles";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -45,8 +44,10 @@ const useStyles = makeStyles((theme) => ({
 const CompetitionPage = () => {
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const { data: matches, isFetching, error } = useGetMatchesQuery(id);
+  const { data: matches, isFetching, error, refetch } = useGetMatchesQuery(id);
+  const [count, setCount] = useState(0);
 
   const [pageUpcomingMatches, setPageUpcomingMatches] = React.useState(0);
   const [rowsPerPageUpcomingMatches, setRowsPerPageUpcomingMatches] =
@@ -72,9 +73,39 @@ const CompetitionPage = () => {
     setPage(0);
   };
 
-  if (isFetching) return <LinearProgress style={{ backgroundColor: "gold" }} />;
+  function handleRefetchOne() {
+    // force re-fetches the data
+    refetch();
+  }
 
-  // TODO: fix the ternary operator : {liveMatches.matches ? "There is no Live Match" : "LIVE Matches"}
+  function handleRefetchTwo() {
+    // has the same effect as `refetch` for the associated query
+    dispatch(
+      footballApi.endpoints.getCompetitions.initiate(
+        { count: 5 },
+        { subscribe: false, forceRefetch: true }
+      )
+    );
+  }
+
+  if (error) {
+    const timer = setTimeout(() => {
+      setCount("Timeout called!");
+      console.log("fetch API Error, Refetch in 15s");
+      refetch();
+    }, 15000);
+    return () => clearTimeout(timer);
+  }
+
+  if (error)
+    return (
+      <div>
+        <button onClick={handleRefetchOne}>Force re-fetch 1</button>
+        <button onClick={handleRefetchTwo}>Force re-fetch 2</button>
+      </div>
+    );
+
+  if (isFetching) return <LinearProgress style={{ backgroundColor: "gold" }} />;
 
   return (
     <>
@@ -121,9 +152,16 @@ const CompetitionPage = () => {
             );
           })}
         <Paper
-          sx={{ width: "95%", overflow: "hidden", backgroundColor: "#2B2D2F", color: "black" }}
+          sx={{
+            width: "95%",
+            overflow: "hidden",
+            backgroundColor: "#2B2D2F",
+            color: "black",
+          }}
         >
-          <TableContainer sx={{ maxHeight: 440, backgroundColor: "#2B2D2F", color: "black" }}>
+          <TableContainer
+            sx={{ maxHeight: 440, backgroundColor: "#2B2D2F", color: "black" }}
+          >
             <Table stickyHeader aria-label="competitions table">
               <TableHead>
                 <TableRow>
@@ -137,7 +175,11 @@ const CompetitionPage = () => {
               <TableBody>
                 {matches?.matches
                   .filter((league) => league?.status === "SCHEDULED")
-                  .slice(pageUpcomingMatches * rowsPerPageUpcomingMatches, pageUpcomingMatches * rowsPerPageUpcomingMatches + rowsPerPageUpcomingMatches)
+                  .slice(
+                    pageUpcomingMatches * rowsPerPageUpcomingMatches,
+                    pageUpcomingMatches * rowsPerPageUpcomingMatches +
+                      rowsPerPageUpcomingMatches
+                  )
                   .map((league) => {
                     return (
                       <TableRow
