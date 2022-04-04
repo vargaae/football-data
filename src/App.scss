@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;800&display=swap");
 
+// GENERAL STTYLES
 *,
 *:before,
 *:after {
@@ -35,6 +36,7 @@ ul {
   list-style-type: none;
 }
 
+// FOOTER
 .footer {
   display: flex;
   flex-direction: column;
@@ -56,7 +58,6 @@ ul {
   }
 }
 
-// FOOTER
 .footer__item {
   flex: 1;
   min-width: 0;
