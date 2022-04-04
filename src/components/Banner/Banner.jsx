@@ -39,7 +39,7 @@ const Banner = () => {
               fontFamily: "Montserrat",
             }}
           >
-            Football App
+            Football-data Application
           </Typography>
           <Typography
             variant="subtitle2"

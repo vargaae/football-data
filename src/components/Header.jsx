@@ -29,7 +29,7 @@ function Header() {
               style={{
                 fontWeight: "bold",
                 fontFamily: "Montserrat",
-                color: "white",
+                color: "gold",
               }}
             >
               Football App
