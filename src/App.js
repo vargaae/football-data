@@ -7,9 +7,9 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles(() => ({
   App: {
     backgroundColor: "#14161a",
-    color: "white",
+    color: "14161a",
     minHeight: "100vh",
-  },
+  }
 }));
 
 function App() {

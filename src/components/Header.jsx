@@ -24,11 +24,11 @@ function Header() {
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: "#FFF",
+        main: "#fff"
       },
-      type: "dark",
-    },
-  });
+      type: "dark"
+    }
+  })
 
   let navigate = useNavigate();
   function handleClick() {

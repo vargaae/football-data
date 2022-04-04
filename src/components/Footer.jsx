@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <section className="footer">
       <div className="footer__item footer__item--start">
-        <ul>
+        <ul className="footer__list">
           <li>
             Data from{" "}
             <a

@@ -15,7 +15,7 @@
 
 p,
 h2,
-ul {
+.footer__list {
   color: white;
 }
 
@@ -34,6 +34,29 @@ a:hover {
 
 ul {
   list-style-type: none;
+}
+
+.score {
+  font-weight: 800;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+span.status {
+  font-weight: 900;
+  font-size: 1.3rem;
+  padding: 1rem;
+  float: right;
+}
+.live {
+  font-weight: 600;
+  color: #3f51b5;
+  padding: 0.5rem;
+}
+
+.status {
+  font-weight: 900;
+  font-size: 1.2rem;
 }
 
 // FOOTER
