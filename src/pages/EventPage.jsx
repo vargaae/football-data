@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -12,9 +13,15 @@ import {
 } from "../features/Api/FootballApi";
 
 const EventPage = (matchId) => {
+  const dispatch = useDispatch();
   const { id } = useParams();
-
-  const { data: match, isFetching } = useGetMatchDetailsQuery(id);
+  const {
+    data: match,
+    isFetching,
+    error,
+    refetch,
+  } = useGetMatchDetailsQuery(id);
+  const [count, setCount] = useState(0);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,6 +52,38 @@ const EventPage = (matchId) => {
   }));
 
   const classes = useStyles();
+
+  function handleRefetchOne() {
+    // force re-fetches the data
+    refetch();
+  }
+
+  function handleRefetchTwo() {
+    // has the same effect as `refetch` for the associated query
+    dispatch(
+      footballApi.endpoints.getCompetitions.initiate(
+        { count: 5 },
+        { subscribe: false, forceRefetch: true }
+      )
+    );
+  }
+
+  if (error) {
+    const timer = setTimeout(() => {
+      setCount("Timeout called!");
+      console.log("fetch API Error, Refetch in 15s");
+      refetch();
+    }, 15000);
+    return () => clearTimeout(timer);
+  }
+
+  if (error)
+    return (
+      <div>
+        <button onClick={handleRefetchOne}>Force re-fetch 1</button>
+        <button onClick={handleRefetchTwo}>Force re-fetch 2</button>
+      </div>
+    );
 
   if (isFetching) return <LinearProgress style={{ backgroundColor: "gold" }} />;
 
