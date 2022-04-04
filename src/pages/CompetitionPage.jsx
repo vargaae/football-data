@@ -31,14 +31,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  heading: {
-    fontWeight: "bold",
-    color: "white",
-    fontFamily: "Montserrat",
-  },
-  table: {
-    minWidth: 650,
-  },
 }));
 
 const CompetitionPage = () => {
@@ -109,7 +101,15 @@ const CompetitionPage = () => {
 
   return (
     <>
-      <Typography variant="subtitle1" className={classes.heading}>
+      <Typography
+        variant="subtitle1"
+        className="breadcrumbs"
+        style={{
+          fontWeight: "bold",
+          fontFamily: "Montserrat",
+          color: "white",
+        }}
+      >
         <Link to="/">COMPETITONS</Link> {">"} {matches?.competition?.name}{" "}
         MATCHES
       </Typography>
@@ -156,12 +156,9 @@ const CompetitionPage = () => {
             width: "95%",
             overflow: "hidden",
             backgroundColor: "#2B2D2F",
-            color: "black",
           }}
         >
-          <TableContainer
-            sx={{ maxHeight: 440, backgroundColor: "#2B2D2F", color: "black" }}
-          >
+          <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="competitions table">
               <TableHead>
                 <TableRow>

@@ -14,8 +14,7 @@
 }
 
 p,
-h2,
-.footer__list {
+h2 {
   color: white;
 }
 
@@ -36,6 +35,24 @@ ul {
   list-style-type: none;
 }
 
+// Header
+.title {
+  flex: 1;
+  color: gold;
+  font-family: 'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
+  // font-family: Montserrat;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+// breadcrumbs
+.breadcrumbs {
+  font-weight: bold;
+  color: white;
+  font-family: Montserrat;
+}
+
+// CompetitionPage
 .score {
   font-weight: 800;
   font-size: 2rem;
@@ -90,4 +107,8 @@ span.status {
 .footer__item--start {
   order: -1;
   text-align: right;
+}
+
+.footer__list {
+  color: white;
 }
