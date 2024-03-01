@@ -7,9 +7,6 @@
 <p align="center">
 Football App fetches data from football-data.org with RTK API Query.
 </p>
- 🚀 Cloud Application Platform: deployed on Heroku (PaaS) : 
- (https://football-data-bg.herokuapp.com/)
-<img alt="Application image" src="https://blackdeerdev.com/wp-content/uploads/2021/02/Heroku.png" width="250" />
 
 ## 🛠 Front End: 
 - ReactJS 18
